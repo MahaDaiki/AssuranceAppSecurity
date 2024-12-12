@@ -11,11 +11,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+@NoArgsConstructor
 @AllArgsConstructor
 @Service
 public class CustomUserDetailServiceImpl implements UserDetailsService {
 
-    private final AuthenticationDaoInt authenticationDao;
+    private  AuthenticationDaoInt authenticationDao;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -24,6 +25,9 @@ public class CustomUserDetailServiceImpl implements UserDetailsService {
         if (utilisateur == null) {
             throw new UsernameNotFoundException("User not found with this email: "+email);
         }
+        System.out.println("getUsername"+utilisateur.getEmail());
+        System.out.println( utilisateur.getMotdepasse());
+        System.out.println("ROLE: "+utilisateur.getRole().name());
 
         return User.builder()
                 .username(utilisateur.getEmail())

@@ -1,9 +1,11 @@
 package org.example.assuranceapp.service.serviceImplementation;
 
 import org.example.assuranceapp.dao.daoInterface.AuthenticationDaoInt;
+import org.example.assuranceapp.enums.Role;
 import org.example.assuranceapp.models.Utilisateur;
 import org.example.assuranceapp.service.serviceInterface.AuthenticationServiceInt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
@@ -25,13 +27,18 @@ public class AuthenticationServiceImpl implements AuthenticationServiceInt {
 //            throw new IllegalArgumentException("Phone number must be exactly 10 digits.");
 //        }
 
-
         if (utilisateur.getNom() == null || utilisateur.getNom().isEmpty() ||
                 utilisateur.getMotdepasse() == null || utilisateur.getMotdepasse().isEmpty() ||
                 utilisateur.getAdresse() == null || utilisateur.getAdresse().isEmpty() ||
                 utilisateur.getEmail() == null || utilisateur.getEmail().isEmpty()) {
             throw new IllegalArgumentException("All fields are required.");
         }
+        if (utilisateur.getRole() == null || utilisateur.getRole().name().isEmpty()) {
+            utilisateur.setRole(Role.valueOf("ROLE_USER"));
+        }
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(utilisateur.getMotdepasse());
+        utilisateur.setMotdepasse(hashedPassword);
 
         return authenticationDao.Register(utilisateur);
     }

@@ -17,6 +17,9 @@
 
     <!-- Activation des annotations Spring -->
     <context:component-scan base-package="org.example.assuranceapp"/>
+    <context:component-scan base-package="org.example.assuranceapp.service.serviceImplementation"/>
+
+
 
     <!-- Activation des fonctionnalités Spring MVC -->
     <mvc:annotation-driven/>
@@ -36,6 +39,7 @@
         </property>
     </bean>
 
+
     <!-- Configuration du gestionnaire de transactions -->
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
@@ -43,5 +47,8 @@
 
     <!-- Activation de la gestion des transactions par annotations -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
+
+
+
 
 </beans>
