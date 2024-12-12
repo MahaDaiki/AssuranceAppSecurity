@@ -5,7 +5,7 @@ import org.example.assuranceapp.models.Utilisateur;
 
 public interface AuthenticationDaoInt {
 
-    public boolean Register(Utilisateur utilisateur);
-    public Utilisateur Login(String email, String password);
-
+    boolean Register(Utilisateur utilisateur);
+    Utilisateur Login(String email, String password);
+    Utilisateur getUserByEmail(String email);
 }
