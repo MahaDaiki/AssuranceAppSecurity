@@ -35,4 +35,17 @@ public class AuthenticationDaoImpl implements AuthenticationDaoInt {
             return null;
         }
     }
+
+    @Override
+    @Transactional
+    public Utilisateur getUserByEmail(String email) {
+        try {
+            return entityManager.createQuery("SELECT u FROM Utilisateur u WHERE u.email = :email ", Utilisateur.class)
+                    .setParameter("email", email)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
 }
