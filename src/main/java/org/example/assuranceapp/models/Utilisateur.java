@@ -1,11 +1,21 @@
 package org.example.assuranceapp.models;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import org.example.assuranceapp.enums.Role;
+
 import javax.persistence.*;
 import java.util.List;
 
 
+@Getter
+@Setter
+@Data
 @Entity
+@AllArgsConstructor
 public class Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,50 +34,20 @@ public class Utilisateur {
     @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL)
     private List<Assurance> assurances;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
+
     public Utilisateur() {
     }
-    public Utilisateur(String nom, String motdepasse, String adresse, String email, int telephone) {
+    public Utilisateur(String nom, String motdepasse, String adresse, String email, int telephone, Role role) {
         this.nom = nom;
         this.motdepasse = motdepasse;
         this.adresse = adresse;
         this.email = email;
         this.telephone = telephone;
+        this.role = role;
     }
 
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-    public String getNom() {
-        return nom;
-    }
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-    public String getMotdepasse() {
-        return motdepasse;
-    }
-    public void setMotdepasse(String motdepasse) {
-        this.motdepasse = motdepasse;
-    }
-    public String getAdresse() {
-        return adresse;
-    }
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
-    }
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    public int getTelephone() {
-        return telephone;
-    }
-    public void setTelephone(int telephone) {
-        this.telephone = telephone;
-    }
+
 }
