@@ -127,7 +127,7 @@
 
 
   <build>
-    <finalName>AssuranceApp</finalName>
+    <finalName>AssuranceAppSecurity</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -156,10 +156,9 @@
           </goals>
 
         </execution>
-
-
       </executions>
     </plugin>
+
     </plugins>
   </build>
 </project>

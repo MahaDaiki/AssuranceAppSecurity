@@ -1,13 +1,15 @@
-
-FROM openjdk:17-jdk-slim
-
-
-WORKDIR /AssuranceAppSecurity
+# Use an official Tomcat image as the base image
+FROM tomcat:9.0
 
 
-COPY target/AssuranceAppSecurity.jar /AssuranceAppSecurity.jar
+RUN rm -rf /usr/local/tomcat/webapps/*
+
+WORKDIR /usr/local/tomcat/webapps/
+
+COPY target/AssuranceAppSecurity.war /usr/local/tomcat/webapps/ROOT.war
 
 
-EXPOSE 8080
+EXPOSE 5050
 
-ENTRYPOINT ["java", "-jar", "AssuranceAppSecurity.jar"]
+# Start Tomcat server
+CMD ["catalina.sh", "run"]
