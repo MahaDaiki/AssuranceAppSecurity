@@ -16,18 +16,12 @@
 
   <display-name>FirstSpringMVC</display-name>
 
-  <servlet>
-    <servlet-name>spring-dispatcher</servlet-name>
-    <servlet-class>
-      org.springframework.web.servlet.DispatcherServlet
-    </servlet-class>
-  </servlet>
+  <listener>
+    <listener-class>
+      org.springframework.web.context.ContextLoaderListener
+    </listener-class>
+  </listener>
 
-
-  <servlet-mapping>
-    <servlet-name>spring-dispatcher</servlet-name>
-    <url-pattern>/</url-pattern>
-  </servlet-mapping>
 
   <filter>
     <filter-name>springSecurityFilterChain</filter-name>
@@ -43,20 +37,19 @@
     <param-name>contextClass</param-name>
     <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
   </context-param>
+
+
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>
-      /WEB-INF/spring-dispatcher-servlet.xml
+      org.example.assuranceapp.config.AppConfig
+      org.example.assuranceapp.config.WebConfig
+      org.example.assuranceapp.config.JpaConfig
       org.example.assuranceapp.security.SecurityConfig
     </param-value>
 
   </context-param>
 
 
-  <listener>
-    <listener-class>
-      org.springframework.web.context.ContextLoaderListener
-    </listener-class>
-  </listener>
 
 </web-app>
